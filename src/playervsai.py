@@ -93,11 +93,22 @@ class QuadConnectGame:
         pygame.display.update()
         if game_over_check(self.board, piece):
             self.display_winner(win_message)
+            print(win_message) 
             self.game_over = True
             return self.handle_game_over()
 
     def display_winner(self, message):
-        label = self.myfont.render(message, 1, colors["DARKGREY"])
+        if self.turn == PLAYER:
+            print("playerwinconsole")
+            message = "You win!! ^_^"
+            color = colors["GREEN"]
+            player_wins_sound.play()
+        else:
+            color = colors["RED"]
+            print("aiwinconsole")
+            message = "AI wins!! :["
+            ai_wins_sound.play()
+        label = self.myfont.render(message, 1, color)
         screen.blit(label, (40, 10))
         pygame.display.update()
 
