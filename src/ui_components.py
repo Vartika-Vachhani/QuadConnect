@@ -1,6 +1,6 @@
 import pygame
 import os
-
+import time 
 
 class Button:
     def __init__(self, color, x, y, width,
@@ -41,6 +41,9 @@ class Button:
         text = self.font.render(self.text, 1, self.text_color)
         win.blit(text, (self.x + (self.width/2 - text.get_width()/2), self.y + (self.height/2 - text.get_height()/2)))
 
+    def get_timestamp():
+        return time.strftime("%H:%M:%S",time.localtime())
+
     def is_over(self, pos):
         # Pos is the mouse position or a tuple of (x,y) coordinates
         if self.x < pos[0] < self.x + self.width and self.y < pos[1] < self.y + self.height:
@@ -49,9 +52,14 @@ class Button:
 pygame.mixer.init()
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-sound_path = os.path.join(script_dir, '../assets/sound')
+sound_path = os.path.join(script_dir, '../assets/sounds')
 
 ai_move_sound = pygame.mixer.Sound(os.path.join(sound_path, 'AI_sound.ogg'))
 self_move_sound = pygame.mixer.Sound(os.path.join(sound_path,'self_sound.ogg'))
 ai_wins_sound = pygame.mixer.Sound(os.path.join(sound_path,"looser.ogg"))
 player_wins_sound = pygame.mixer.Sound(os.path.join(sound_path,"winner.ogg"))
+
+p1_move_sound = pygame.mixer.Sound(os.path.join(sound_path, 'AI_sound.ogg'))
+p2_move_sound = pygame.mixer.Sound(os.path.join(sound_path,'self_sound.ogg'))
+p1_wins_sound = pygame.mixer.Sound(os.path.join(sound_path,"looser.ogg"))
+p2_wins_sound = pygame.mixer.Sound(os.path.join(sound_path,"winner.ogg"))
